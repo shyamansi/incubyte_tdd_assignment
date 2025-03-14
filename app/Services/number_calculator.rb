@@ -6,6 +6,10 @@ class NumberCalculator
     num = num.gsub(delimiter, ",")
   end
 
-  num = num.gsub("\n", ",").split(",").map(&:to_i).sum
+  num = num.gsub("\n", ",").split(",").map(&:to_i)
+   negatives = num.select { |n| n < 0 }
+  raise "Negative numbers not allowed: #{negatives.join(', ')}" if negatives.any?
+
+  num.sum
 	end
 end
